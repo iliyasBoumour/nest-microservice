@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 // to validate our env variables
 import * as Joi from '@hapi/joi';
 import { DatabaseModule } from './database/database.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { DatabaseModule } from './database/database.module';
       }),
     }),
     DatabaseModule,
+    UserModule,
   ],
   controllers: [],
   providers: [],
