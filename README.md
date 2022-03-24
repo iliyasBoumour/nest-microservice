@@ -3,7 +3,7 @@
 
 ## RabbitMQ
 
-(https://www.rabbitmq.com/img/tutorials/intro/hello-world-example-routing.png)
+https://www.rabbitmq.com/img/tutorials/intro/hello-world-example-routing.png
 
 - The producer (publisher), its job is to send the messages.
 - The consumer waits to receive messages.
