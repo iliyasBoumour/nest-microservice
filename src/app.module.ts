@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 // to validate our env variables
 import * as Joi from '@hapi/joi';
 import { DatabaseModule } from './database/database.module';
-import { UserModule } from './user/user.module';
+import { EmailModule } from './email/email.module';
 
 @Module({
   imports: [
@@ -15,14 +15,10 @@ import { UserModule } from './user/user.module';
         POSTGRES_USER: Joi.string().required(),
         POSTGRES_PASSWORD: Joi.string().required(),
         POSTGRES_DB: Joi.string().required(),
-        JWT_ACCESS_SECRET: Joi.string().required(),
-        JWT_ACCESS_EXPIRATION_TIME: Joi.string().required(),
-        JWT_REFRESH_SECRET: Joi.string().required(),
-        JWT_REFRESH_EXPIRATION_TIME: Joi.string().required(),
       }),
     }),
     DatabaseModule,
-    UserModule,
+    EmailModule,
   ],
   controllers: [],
   providers: [],
