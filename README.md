@@ -1,9 +1,11 @@
+## TCP based communicatoion
+
 - The request-response message style is suitable when we want to exchange messages between services.
 - The event-based communication is fitting for cases in which we don’t want to wait for a response.
 
 ## RabbitMQ
 
-https://www.rabbitmq.com/img/tutorials/intro/hello-world-example-routing.png
+![alt text](https://www.rabbitmq.com/img/tutorials/intro/hello-world-example-routing.png)
 
 - The producer (publisher), its job is to send the messages.
 - The consumer waits to receive messages.

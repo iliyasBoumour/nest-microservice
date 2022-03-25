@@ -8,12 +8,20 @@ export class EmailController {
   constructor(private readonly emailService: EmailService) {}
 
   @MessagePattern({ cmd: 'createEmail' })
-  create(@Payload() createEmailDto: CreateEmailDto) {
+  async create(@Payload() createEmailDto: CreateEmailDto) {
+    // const channel = context.getChannelRef();
+    // const originalMsg = context.getMessage();
+    // channel.ack(originalMsg);
     return this.emailService.create(createEmailDto);
   }
 
   @MessagePattern({ cmd: 'findAllEmail' })
   findAll() {
     return this.emailService.findAll();
+  }
+
+  @EventPattern({ cmd: 'removeEmail' })
+  async deleteOne(@Payload() id: number) {
+    await this.emailService.removeOne(id);
   }
 }
