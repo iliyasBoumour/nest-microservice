@@ -2,26 +2,19 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { ConfigService } from '@nestjs/config';
+import { join } from 'path';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService);
 
-  const user = configService.get('RABBITMQ_USER');
-  const password = configService.get('RABBITMQ_PASSWORD');
-  const host = configService.get('RABBITMQ_HOST');
-  const queueName = configService.get('RABBITMQ_QUEUE_NAME');
-
   await app.connectMicroservice<MicroserviceOptions>({
-    transport: Transport.RMQ,
+    transport: Transport.GRPC,
     options: {
-      urls: [`amqp://${user}:${password}@${host}`],
-      queue: queueName,
-      // noAck: false,
-      queueOptions: {
-        // Queues in RabbitMQ can be durable or transient. The metadata of a durable queue is stored on the disk. If the queue is not durable, it is deleted during boot and would not survive a restart. It would delete not-consumed messages.
-        durable: true,
-      },
+      package: 'emails',
+      protoPath: join(__dirname, 'email', 'emails.proto'),
+      // this gRPC server can be accessed by the provided URL.
+      url: configService.get('GRPC_CONNECTION_URL'),
     },
   });
 

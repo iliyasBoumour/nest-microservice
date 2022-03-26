@@ -1,1 +1,4 @@
-export class CreateEmailDto {}
+export class CreateEmailDto {
+  object: string;
+  content: string;
+}
